@@ -19,16 +19,21 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'https://gefyra.agency',
+        'https://www.gefyra.agency',
+    ],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['X-XSRF-TOKEN'],
 
-    'max_age' => 0,
+    'max_age' => 7200,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

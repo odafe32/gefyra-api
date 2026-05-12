@@ -62,26 +62,48 @@ class BookingController extends Controller
             ]);
 
             // Send confirmation email to client
+            $clientEmailSent = false;
             try {
+                Log::info('Attempting to send client confirmation email to: ' . $booking->email);
+                Log::info('Mail config - MAILER: ' . config('mail.default') . ', HOST: ' . config('mail.mailers.smtp.host'));
+                
                 Mail::to($booking->email)->send(new BookingConfirmation($booking, false));
+                $clientEmailSent = true;
+                Log::info('Client confirmation email sent successfully to: ' . $booking->email);
             } catch (\Exception $e) {
                 Log::error('Failed to send client confirmation email: ' . $e->getMessage());
+                Log::error('Exception trace: ' . $e->getTraceAsString());
             }
 
             // Send notification email to admin
+            $adminEmailSent = false;
             try {
                 $adminEmail = config('mail.admin_email');
+                Log::info('Attempting to send admin notification email to: ' . $adminEmail);
+                
                 if ($adminEmail) {
                     Mail::to($adminEmail)->send(new BookingConfirmation($booking, true));
+                    $adminEmailSent = true;
+                    Log::info('Admin notification email sent successfully to: ' . $adminEmail);
+                } else {
+                    Log::warning('Admin email not configured, skipping admin notification');
                 }
             } catch (\Exception $e) {
                 Log::error('Failed to send admin notification email: ' . $e->getMessage());
+                Log::error('Exception trace: ' . $e->getTraceAsString());
             }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Booking created successfully',
                 'data' => $booking,
+                'debug' => [
+                    'client_email_sent' => $clientEmailSent,
+                    'admin_email_sent' => $adminEmailSent,
+                    'mailer' => config('mail.default'),
+                    'from_address' => config('mail.from.address'),
+                    'admin_address' => config('mail.admin_email'),
+                ],
             ], 201);
 
         } catch (\Exception $e) {
