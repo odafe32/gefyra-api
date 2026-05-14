@@ -125,7 +125,7 @@ return [
     |
     */
 
-    // 'admin_email' => env('MAIL_ADMIN_EMAIL', 'info@gefyra.agency'),
-    'admin_email' => env('MAIL_ADMIN_EMAIL', 'godfreyj.sule1@gmail.com'),
+    'admin_email' => env('MAIL_ADMIN_EMAIL', 'info@gefyra.agency'),
+    // 'admin_email' => env('MAIL_ADMIN_EMAIL', 'godfreyj.sule1@gmail.com'),
 
 ];

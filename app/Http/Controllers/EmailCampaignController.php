@@ -39,7 +39,22 @@ class EmailCampaignController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
+        // Parse JSON recipients from form-data if provided as string
+        $input = $request->all();
+        if (isset($input['recipients']) && is_string($input['recipients'])) {
+            $decoded = json_decode($input['recipients'], true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $input['recipients'] = $decoded;
+                $request->merge(['recipients' => $decoded]);
+            }
+        }
+
+        // Parse send_now to boolean
+        if (isset($input['send_now'])) {
+            $input['send_now'] = in_array($input['send_now'], [true, 'true', '1', 1, 'yes'], true);
+        }
+
+        $validator = Validator::make($input, [
             'name' => 'required|string|max:255',
             'subject' => 'required|string|max:255',
             'content' => 'required|string|max:50000',
@@ -100,7 +115,7 @@ class EmailCampaignController extends Controller
         EmailCampaignLog::insert($logs);
 
         // If scheduled for now or immediate send requested
-        if (!$request->scheduled_at && $request->input('send_now')) {
+        if (empty($input['scheduled_at']) && !empty($input['send_now'])) {
             $this->dispatchCampaign($campaign);
         }
 
