@@ -61,11 +61,15 @@ class BookingController extends Controller
                 'status' => Booking::STATUS_PENDING,
             ]);
 
+            // Force mail to send immediately (not queue)
+            config(['queue.default' => 'sync']);
+
             // Send confirmation email to client
             $clientEmailSent = false;
             try {
                 Log::info('Attempting to send client confirmation email to: ' . $booking->email);
                 Log::info('Mail config - MAILER: ' . config('mail.default') . ', HOST: ' . config('mail.mailers.smtp.host'));
+                Log::info('Queue driver: ' . config('queue.default'));
                 
                 Mail::to($booking->email)->send(new BookingConfirmation($booking, false));
                 $clientEmailSent = true;
