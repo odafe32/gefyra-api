@@ -101,22 +101,22 @@
                             </tr>
                         </table>
 
-                        <!-- Social icon buttons — real PNG icons, email-safe -->
+                                                <!-- Social icon buttons — base64 embedded, no external requests -->
                         <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px auto;">
                             <tr>
                                 <!-- LinkedIn -->
                                 <td style="padding:0 6px;">
                                     <a href="https://www.linkedin.com/company/gefyraconsultingagency/"
-                                       style="display:inline-block;background-color:#0A66C2;border-radius:10px;padding:10px 16px;text-decoration:none;vertical-align:middle;">
+                                       style="display:inline-block;background-color:#0A66C2;border-radius:10px;padding:10px 16px;text-decoration:none;">
                                         <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="vertical-align:middle;padding-right:8px;">
-                                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/linkedin.svg"
+                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVR4nO2UUQ7AIAhDxXj/K7MvFxMyRAdj2dpfQF9JQynQ30VakZn5bCRSe10Bxo/FgDNI9XzMBUBzb6nfBnha7wOYhexzIRRurkLWne+EUNuaaQNRR8gMECkAtNWBWR5WQ5q+AQAAAAAAAACUrgPxjhw2fE50HgAAAABJRU5ErkJggg=="
                                                          width="16" height="16" alt="LinkedIn"
-                                                         style="display:block;width:16px;height:16px;filter:brightness(0) invert(1);">
+                                                         style="display:block;width:16px;height:16px;">
                                                 </td>
                                                 <td style="vertical-align:middle;">
-                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;letter-spacing:0.2px;">LinkedIn</span>
+                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;">LinkedIn</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -125,16 +125,16 @@
                                 <!-- Instagram -->
                                 <td style="padding:0 6px;">
                                     <a href="https://www.instagram.com/gefyra__/"
-                                       style="display:inline-block;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:10px;padding:10px 16px;text-decoration:none;vertical-align:middle;">
+                                       style="display:inline-block;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:10px;padding:10px 16px;text-decoration:none;">
                                         <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="vertical-align:middle;padding-right:8px;">
-                                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/instagram.svg"
+                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAv0lEQVR4nO2W4Q6AIAiEpfX+r3z9ya2ZgGdoa3n/cgrf8IRSWvq7xNsAAI+TiKh5ttHJvTgqWT5k0bOJa7GqFRiRXFu7AUQkZ8BMD8zQ3nuwVs5r1URErnvK70cAmqsBoITwYtEAlkdwivEP5QHPoHmd6R/NAK2vg4V4/RUsgO8AtJqLbeVUBTyInjlCN6LcUjUIdoh1ecBrRIy6h1HUuH79FVRl3fG0mJEQpmm9gxEAKemeMT0QZbRR/5dLIToAMLOUEsGZtgcAAAAASUVORK5CYII="
                                                          width="16" height="16" alt="Instagram"
-                                                         style="display:block;width:16px;height:16px;filter:brightness(0) invert(1);">
+                                                         style="display:block;width:16px;height:16px;">
                                                 </td>
                                                 <td style="vertical-align:middle;">
-                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;letter-spacing:0.2px;">Instagram</span>
+                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;">Instagram</span>
                                                 </td>
                                             </tr>
                                         </table>

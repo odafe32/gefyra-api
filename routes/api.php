@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\EmailCampaignController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,16 @@ Route::prefix('bookings')->group(function () {
         Route::post('/{booking}/reschedule', [BookingController::class, 'reschedule']);
         Route::delete('/{booking}', [BookingController::class, 'destroy']);
     });
+});
+
+// ── Email Marketing (Admin only) ──────────────────────────────────────────────
+Route::prefix('email-campaigns')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', [EmailCampaignController::class, 'index']);
+    Route::post('/', [EmailCampaignController::class, 'store']);
+    Route::post('/preview', [EmailCampaignController::class, 'preview']);
+    Route::get('/{campaign}', [EmailCampaignController::class, 'show']);
+    Route::patch('/{campaign}', [EmailCampaignController::class, 'update']);
+    Route::post('/{campaign}/send', [EmailCampaignController::class, 'sendNow']);
+    Route::get('/{campaign}/logs', [EmailCampaignController::class, 'logs']);
+    Route::delete('/{campaign}', [EmailCampaignController::class, 'destroy']);
 });
