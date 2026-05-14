@@ -21,14 +21,14 @@ class AdminSeeder extends Seeder
         $users = [
             [
                 'name'     => 'Gefyra Super Admin',
-                'email'    => 'superadmin@gefyra.agency',
-                'password' => Hash::make('Gefyra@Super2025!'),
+                'email'    => 'josephine@gefyra.agency',
+                'password' => Hash::make('Gefyra@Super2026!'),
                 'role'     => 'super_admin',
             ],
             [
                 'name'     => 'Gefyra Admin',
-                'email'    => 'admin@gefyra.agency',
-                'password' => Hash::make('Gefyra@Admin2025!'),
+                'email'    => 'info@gefyra.agency',
+                'password' => Hash::make('Gefyra@Admin2026!'),
                 'role'     => 'admin',
             ],
             [
@@ -48,12 +48,8 @@ class AdminSeeder extends Seeder
 
         $this->command->info('Gefyra admin users seeded:');
         $this->command->table(
-            ['Name', 'Email', 'Role', 'Password'],
-            [
-                ['Gefyra Super Admin', 'superadmin@gefyra.agency', 'super_admin', 'Gefyra@Super2025!'],
-                ['Gefyra Admin',       'admin@gefyra.agency',      'admin',       'Gefyra@Admin2025!'],
-                ['Gefyra Viewer',      'viewer@gefyra.agency',     'viewer',      'Gefyra@View2025!'],
-            ]
+            ['Name', 'Email', 'Role'],
+            array_map(fn($u) => [$u['name'], $u['email'], $u['role']], $users)
         );
     }
 }
