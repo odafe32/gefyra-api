@@ -27,6 +27,8 @@ Route::prefix('bookings')->group(function () {
         Route::post('/admin', [BookingController::class, 'adminStore']);
         Route::get('/statistics', [BookingController::class, 'statistics']);
         Route::get('/admin-slots', [BookingController::class, 'getAdminSlots']);
+        Route::post('/custom-slots', [BookingController::class, 'addCustomSlot']);
+        Route::delete('/custom-slots', [BookingController::class, 'removeCustomSlot']);
         Route::get('/{booking}', [BookingController::class, 'show']);
         Route::patch('/{booking}/status', [BookingController::class, 'updateStatus']);
         Route::post('/{booking}/accept', [BookingController::class, 'accept']);

@@ -10,8 +10,9 @@
     <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
     <![endif]-->
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; background-color: #F5EDD8; width: 100% !important; }
+        body { margin: 0; padding: 0; background-color: #F5EDD8; width: 100% !important; font-family: 'DM Sans', -apple-system, Arial, sans-serif; }
         table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
         img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
         a { text-decoration: none; }
@@ -23,7 +24,7 @@
         }
     </style>
 </head>
-<body style="margin:0;padding:0;background-color:#F5EDD8;font-family:Georgia,serif;">
+<body style="margin:0;padding:0;background-color:#F5EDD8;font-family:'DM Sans',-apple-system,Arial,sans-serif;">
 
 <!-- Outer wrapper -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F5EDD8;">
@@ -33,11 +34,9 @@
             <!-- Email card -->
             <table class="email-wrapper" role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(26,26,26,0.10);">
 
-                <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+                <!-- HEADER -->
                 <tr>
                     <td style="background-color:#1A1A1A;padding:40px 40px 32px 40px;text-align:center;">
-
-                        <!-- Logo mark -->
                         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td align="center" style="padding-bottom:20px;">
@@ -48,15 +47,14 @@
                             </tr>
                             <tr>
                                 <td align="center">
-                                    <p style="margin:0;font-family:Georgia,serif;font-size:32px;font-weight:700;color:#C8871F;letter-spacing:-0.5px;line-height:1;">Gefyra</p>
+                                    <p style="margin:0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:32px;font-weight:700;color:#C8871F;letter-spacing:-1px;line-height:1;">Gefyra</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="center" style="padding-top:8px;">
-                                    <p style="margin:0;font-family:Georgia,serif;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase;">Every talent, its place. Every client, their match.</p>
+                                    <p style="margin:0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:2.5px;text-transform:uppercase;font-weight:500;">Every talent, its place. Every client, their match.</p>
                                 </td>
                             </tr>
-                            <!-- Gold rule -->
                             <tr>
                                 <td align="center" style="padding-top:28px;">
                                     <table role="presentation" cellpadding="0" cellspacing="0" border="0">
@@ -69,56 +67,83 @@
                                 </td>
                             </tr>
                         </table>
-
                     </td>
                 </tr>
 
-                <!-- ═══════════════════════════════ BODY ════════════════════════════════ -->
+                <!-- BODY -->
                 <tr>
                     <td class="email-body-pad" style="padding:40px 40px 32px 40px;background-color:#ffffff;">
                         @yield('content')
                     </td>
                 </tr>
 
-                <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+                <!-- FOOTER -->
                 <tr>
                     <td style="background-color:#1A1A1A;padding:32px 40px;text-align:center;">
 
-                        <p style="margin:0 0 6px 0;font-family:Georgia,serif;font-size:20px;font-weight:700;color:#C8871F;">Gefyra</p>
-                        <p style="margin:0 0 20px 0;font-family:Georgia,serif;font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6;">Connecting African talent with global businesses.</p>
+                        <p style="margin:0 0 6px 0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:20px;font-weight:700;color:#C8871F;">Gefyra</p>
+                        <p style="margin:0 0 20px 0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.45);line-height:1.7;">Connecting African talent with global businesses.</p>
 
                         <!-- Footer links -->
-                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 20px auto;">
-                            <tr>
-                                <td style="padding:0 10px;">
-                                    <a href="https://gefyra.agency" style="font-family:Georgia,serif;font-size:12px;color:rgba(255,255,255,0.55);text-decoration:none;">Website</a>
-                                </td>
-                                <td style="color:rgba(255,255,255,0.2);font-size:12px;">|</td>
-                                <td style="padding:0 10px;">
-                                    <a href="https://gefyra.agency/about" style="font-family:Georgia,serif;font-size:12px;color:rgba(255,255,255,0.55);text-decoration:none;">About</a>
-                                </td>
-                                <td style="color:rgba(255,255,255,0.2);font-size:12px;">|</td>
-                                <td style="padding:0 10px;">
-                                    <a href="mailto:info@gefyra.agency" style="font-family:Georgia,serif;font-size:12px;color:rgba(255,255,255,0.55);text-decoration:none;">Contact</a>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <!-- Social icons (text-based, reliable in all email clients) -->
                         <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px auto;">
                             <tr>
-                                <td style="padding:0 5px;">
-                                    <a href="https://www.linkedin.com/company/gefyraconsultingagency/"
-                                       style="display:inline-block;background-color:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 14px;font-family:Georgia,serif;font-size:11px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.5px;">in</a>
+                                <td style="padding:0 10px;">
+                                    <a href="https://gefyra.agency" style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;">Website</a>
                                 </td>
-                                <td style="padding:0 5px;">
-                                    <a href="https://www.instagram.com/gefyra__/"
-                                       style="display:inline-block;background-color:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 14px;font-family:Georgia,serif;font-size:11px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.5px;">ig</a>
+                                <td style="color:rgba(255,255,255,0.2);font-size:12px;">&middot;</td>
+                                <td style="padding:0 10px;">
+                                    <a href="https://gefyra.agency/about" style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;">About</a>
+                                </td>
+                                <td style="color:rgba(255,255,255,0.2);font-size:12px;">&middot;</td>
+                                <td style="padding:0 10px;">
+                                    <a href="mailto:info@gefyra.agency" style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;">Contact</a>
                                 </td>
                             </tr>
                         </table>
 
-                        <p style="margin:0;font-family:Georgia,serif;font-size:11px;color:rgba(255,255,255,0.25);line-height:1.6;">
+                        <!-- Social icon buttons — real PNG icons, email-safe -->
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px auto;">
+                            <tr>
+                                <!-- LinkedIn -->
+                                <td style="padding:0 6px;">
+                                    <a href="https://www.linkedin.com/company/gefyraconsultingagency/"
+                                       style="display:inline-block;background-color:#0A66C2;border-radius:10px;padding:10px 16px;text-decoration:none;vertical-align:middle;">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="vertical-align:middle;padding-right:8px;">
+                                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/linkedin.svg"
+                                                         width="16" height="16" alt="LinkedIn"
+                                                         style="display:block;width:16px;height:16px;filter:brightness(0) invert(1);">
+                                                </td>
+                                                <td style="vertical-align:middle;">
+                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;letter-spacing:0.2px;">LinkedIn</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </a>
+                                </td>
+                                <!-- Instagram -->
+                                <td style="padding:0 6px;">
+                                    <a href="https://www.instagram.com/gefyra__/"
+                                       style="display:inline-block;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:10px;padding:10px 16px;text-decoration:none;vertical-align:middle;">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="vertical-align:middle;padding-right:8px;">
+                                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/instagram.svg"
+                                                         width="16" height="16" alt="Instagram"
+                                                         style="display:block;width:16px;height:16px;filter:brightness(0) invert(1);">
+                                                </td>
+                                                <td style="vertical-align:middle;">
+                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;letter-spacing:0.2px;">Instagram</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="margin:0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.25);line-height:1.7;">
                             &copy; {{ date('Y') }} Gefyra Consulting &amp; Digital Agency
                         </p>
 
@@ -126,7 +151,6 @@
                 </tr>
 
             </table>
-            <!-- /Email card -->
 
         </td>
     </tr>

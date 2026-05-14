@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\BookingConfirmation;
 use App\Mail\BookingStatusUpdate;
 use App\Models\Booking;
+use App\Models\BookingCustomSlot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -192,26 +193,28 @@ class BookingController extends Controller
         }
 
         $date = $request->date;
-        $allSlots = [
+        $defaultSlots = [
             '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
             '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM',
         ];
 
-        // Get booked slots for the date
+        $customSlotTimes = BookingCustomSlot::where('date', $date)->pluck('slot_time')->toArray();
+        $allSlots = array_unique(array_merge($defaultSlots, $customSlotTimes));
+        usort($allSlots, fn ($a, $b) => strtotime($a) - strtotime($b));
+
         $bookedSlots = Booking::where('booking_date', $date)
             ->whereIn('status', [Booking::STATUS_PENDING, Booking::STATUS_CONFIRMED])
             ->pluck('booking_time')
             ->toArray();
 
-        // Filter out booked slots
-        $availableSlots = array_diff($allSlots, $bookedSlots);
+        $availableSlots = array_values(array_diff($allSlots, $bookedSlots));
 
         return response()->json([
             'success' => true,
             'data' => [
-                'date' => $date,
-                'availableSlots' => array_values($availableSlots),
-                'bookedSlots' => $bookedSlots,
+                'date'           => $date,
+                'availableSlots' => $availableSlots,
+                'bookedSlots'    => $bookedSlots,
             ],
         ]);
     }
@@ -320,10 +323,15 @@ class BookingController extends Controller
         $request->validate(['date' => 'required|date']);
 
         $date = $request->date;
-        $allSlots = [
+        $defaultSlots = [
             '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
             '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM',
         ];
+
+        $customSlotTimes = BookingCustomSlot::where('date', $date)->pluck('slot_time')->toArray();
+        $allSlots = array_unique(array_merge($defaultSlots, $customSlotTimes));
+        usort($allSlots, fn ($a, $b) => strtotime($a) - strtotime($b));
+        $allSlots = array_values($allSlots);
 
         $bookedSlots = Booking::where('booking_date', $date)
             ->whereIn('status', [Booking::STATUS_PENDING, Booking::STATUS_CONFIRMED])
@@ -339,8 +347,44 @@ class BookingController extends Controller
                 'allSlots'       => $allSlots,
                 'availableSlots' => $availableSlots,
                 'bookedSlots'    => $bookedSlots,
+                'customSlots'    => $customSlotTimes,
             ],
         ]);
+    }
+
+    /**
+     * Add a custom time slot for a specific date
+     */
+    public function addCustomSlot(Request $request): JsonResponse
+    {
+        $request->validate([
+            'date'      => 'required|date',
+            'slot_time' => 'required|string|max:20',
+        ]);
+
+        $slot = BookingCustomSlot::firstOrCreate([
+            'date'      => $request->date,
+            'slot_time' => $request->slot_time,
+        ]);
+
+        return response()->json(['success' => true, 'data' => $slot], 201);
+    }
+
+    /**
+     * Remove a custom time slot for a specific date
+     */
+    public function removeCustomSlot(Request $request): JsonResponse
+    {
+        $request->validate([
+            'date'      => 'required|date',
+            'slot_time' => 'required|string|max:20',
+        ]);
+
+        BookingCustomSlot::where('date', $request->date)
+            ->where('slot_time', $request->slot_time)
+            ->delete();
+
+        return response()->json(['success' => true]);
     }
 
     /**
