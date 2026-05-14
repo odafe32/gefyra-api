@@ -24,9 +24,14 @@ Route::prefix('bookings')->group(function () {
     // Admin — protected
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [BookingController::class, 'index']);
+        Route::post('/admin', [BookingController::class, 'adminStore']);
         Route::get('/statistics', [BookingController::class, 'statistics']);
+        Route::get('/admin-slots', [BookingController::class, 'getAdminSlots']);
         Route::get('/{booking}', [BookingController::class, 'show']);
         Route::patch('/{booking}/status', [BookingController::class, 'updateStatus']);
+        Route::post('/{booking}/accept', [BookingController::class, 'accept']);
+        Route::post('/{booking}/decline', [BookingController::class, 'decline']);
+        Route::post('/{booking}/reschedule', [BookingController::class, 'reschedule']);
         Route::delete('/{booking}', [BookingController::class, 'destroy']);
     });
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\BookingConfirmation;
+use App\Mail\BookingStatusUpdate;
 use App\Models\Booking;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -237,5 +238,148 @@ class BookingController extends Controller
             'success' => true,
             'data' => $stats,
         ]);
+    }
+
+    /**
+     * Accept (confirm) a booking and notify the client
+     */
+    public function accept(Request $request, Booking $booking): JsonResponse
+    {
+        $request->validate(['notes' => 'nullable|string|max:1000']);
+
+        $booking->update(['status' => Booking::STATUS_CONFIRMED, 'notes' => $request->notes ?? $booking->notes]);
+
+        try {
+            Mail::to($booking->email)->send(new BookingStatusUpdate($booking, 'accepted', $request->notes));
+        } catch (\Exception $e) {
+            Log::error('Accept email failed: ' . $e->getMessage());
+        }
+
+        return response()->json(['success' => true, 'message' => 'Booking accepted.', 'data' => $booking->fresh()]);
+    }
+
+    /**
+     * Decline a booking and notify the client
+     */
+    public function decline(Request $request, Booking $booking): JsonResponse
+    {
+        $request->validate(['notes' => 'nullable|string|max:1000']);
+
+        $booking->update(['status' => Booking::STATUS_CANCELLED, 'notes' => $request->notes ?? $booking->notes]);
+
+        try {
+            Mail::to($booking->email)->send(new BookingStatusUpdate($booking, 'declined', $request->notes));
+        } catch (\Exception $e) {
+            Log::error('Decline email failed: ' . $e->getMessage());
+        }
+
+        return response()->json(['success' => true, 'message' => 'Booking declined.', 'data' => $booking->fresh()]);
+    }
+
+    /**
+     * Reschedule a booking to a new date/time and notify the client
+     */
+    public function reschedule(Request $request, Booking $booking): JsonResponse
+    {
+        $request->validate([
+            'booking_date' => 'required|date',
+            'booking_time' => 'required|string',
+            'notes'        => 'nullable|string|max:1000',
+        ]);
+
+        $oldDate = $booking->booking_date;
+        $oldTime = $booking->booking_time;
+
+        $booking->update([
+            'booking_date' => $request->booking_date,
+            'booking_time' => $request->booking_time,
+            'status'       => Booking::STATUS_CONFIRMED,
+            'notes'        => $request->notes ?? $booking->notes,
+        ]);
+
+        try {
+            Mail::to($booking->email)->send(new BookingStatusUpdate(
+                $booking,
+                'rescheduled',
+                $request->notes,
+                $request->booking_date,
+                $request->booking_time
+            ));
+        } catch (\Exception $e) {
+            Log::error('Reschedule email failed: ' . $e->getMessage());
+        }
+
+        return response()->json(['success' => true, 'message' => 'Booking rescheduled.', 'data' => $booking->fresh()]);
+    }
+
+    /**
+     * Get available slots for a date (admin version — no date restriction)
+     */
+    public function getAdminSlots(Request $request): JsonResponse
+    {
+        $request->validate(['date' => 'required|date']);
+
+        $date = $request->date;
+        $allSlots = [
+            '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+            '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM',
+        ];
+
+        $bookedSlots = Booking::where('booking_date', $date)
+            ->whereIn('status', [Booking::STATUS_PENDING, Booking::STATUS_CONFIRMED])
+            ->pluck('booking_time')
+            ->toArray();
+
+        $availableSlots = array_values(array_diff($allSlots, $bookedSlots));
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'date'           => $date,
+                'allSlots'       => $allSlots,
+                'availableSlots' => $availableSlots,
+                'bookedSlots'    => $bookedSlots,
+            ],
+        ]);
+    }
+
+    /**
+     * Admin creates a booking on behalf of a client
+     */
+    public function adminStore(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'fullName'    => 'required|string|max:255',
+            'email'       => 'required|email|max:255',
+            'phone'       => 'nullable|string|max:20',
+            'serviceType' => 'required|string|in:va,smm,writer,mktg,dev',
+            'message'     => 'nullable|string|max:2000',
+            'bookingDate' => 'required|date',
+            'bookingTime' => 'required|string',
+            'status'      => 'nullable|string|in:pending,confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => 'Validation failed', 'errors' => $validator->errors()], 422);
+        }
+
+        $booking = Booking::create([
+            'full_name'    => $request->fullName,
+            'email'        => $request->email,
+            'phone'        => $request->phone,
+            'service_type' => $request->serviceType,
+            'message'      => $request->message,
+            'booking_date' => $request->bookingDate,
+            'booking_time' => $request->bookingTime,
+            'status'       => $request->status ?? Booking::STATUS_CONFIRMED,
+        ]);
+
+        try {
+            Mail::to($booking->email)->send(new BookingStatusUpdate($booking, 'accepted'));
+        } catch (\Exception $e) {
+            Log::error('Admin create booking email failed: ' . $e->getMessage());
+        }
+
+        return response()->json(['success' => true, 'message' => 'Booking created.', 'data' => $booking], 201);
     }
 }
