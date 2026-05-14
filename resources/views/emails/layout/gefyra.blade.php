@@ -26,12 +26,10 @@
 </head>
 <body style="margin:0;padding:0;background-color:#F5EDD8;font-family:'DM Sans',-apple-system,Arial,sans-serif;">
 
-<!-- Outer wrapper -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F5EDD8;">
     <tr>
         <td align="center" style="padding:32px 16px;">
 
-            <!-- Email card -->
             <table class="email-wrapper" role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(26,26,26,0.10);">
 
                 <!-- HEADER -->
@@ -84,7 +82,7 @@
                         <p style="margin:0 0 6px 0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:20px;font-weight:700;color:#C8871F;">Gefyra</p>
                         <p style="margin:0 0 20px 0;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.45);line-height:1.7;">Connecting African talent with global businesses.</p>
 
-                        <!-- Footer links -->
+                        <!-- Footer nav links -->
                         <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px auto;">
                             <tr>
                                 <td style="padding:0 10px;">
@@ -101,43 +99,19 @@
                             </tr>
                         </table>
 
-                                                <!-- Social icon buttons — base64 embedded, no external requests -->
+                        <!-- Social buttons — pure text, 100% email-client safe -->
                         <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px auto;">
                             <tr>
-                                <!-- LinkedIn -->
-                                <td style="padding:0 6px;">
+                                <td style="padding:0 5px;">
                                     <a href="https://www.linkedin.com/company/gefyraconsultingagency/"
-                                       style="display:inline-block;background-color:#0A66C2;border-radius:10px;padding:10px 16px;text-decoration:none;">
-                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td style="vertical-align:middle;padding-right:8px;">
-                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVR4nO2UUQ7AIAhDxXj/K7MvFxMyRAdj2dpfQF9JQynQ30VakZn5bCRSe10Bxo/FgDNI9XzMBUBzb6nfBnha7wOYhexzIRRurkLWne+EUNuaaQNRR8gMECkAtNWBWR5WQ5q+AQAAAAAAAACUrgPxjhw2fE50HgAAAABJRU5ErkJggg=="
-                                                         width="16" height="16" alt="LinkedIn"
-                                                         style="display:block;width:16px;height:16px;">
-                                                </td>
-                                                <td style="vertical-align:middle;">
-                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;">LinkedIn</span>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                       style="display:inline-block;background-color:#0A66C2;border-radius:8px;padding:9px 18px;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;text-decoration:none;letter-spacing:0.5px;">
+                                        in &nbsp; LinkedIn
                                     </a>
                                 </td>
-                                <!-- Instagram -->
-                                <td style="padding:0 6px;">
+                                <td style="padding:0 5px;">
                                     <a href="https://www.instagram.com/gefyra__/"
-                                       style="display:inline-block;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:10px;padding:10px 16px;text-decoration:none;">
-                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td style="vertical-align:middle;padding-right:8px;">
-                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAv0lEQVR4nO2W4Q6AIAiEpfX+r3z9ya2ZgGdoa3n/cgrf8IRSWvq7xNsAAI+TiKh5ttHJvTgqWT5k0bOJa7GqFRiRXFu7AUQkZ8BMD8zQ3nuwVs5r1URErnvK70cAmqsBoITwYtEAlkdwivEP5QHPoHmd6R/NAK2vg4V4/RUsgO8AtJqLbeVUBTyInjlCN6LcUjUIdoh1ecBrRIy6h1HUuH79FVRl3fG0mJEQpmm9gxEAKemeMT0QZbRR/5dLIToAMLOUEsGZtgcAAAAASUVORK5CYII="
-                                                         width="16" height="16" alt="Instagram"
-                                                         style="display:block;width:16px;height:16px;">
-                                                </td>
-                                                <td style="vertical-align:middle;">
-                                                    <span style="font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;">Instagram</span>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                       style="display:inline-block;background-color:#C13584;border-radius:8px;padding:9px 18px;font-family:'DM Sans',-apple-system,Arial,sans-serif;font-size:12px;font-weight:700;color:#ffffff;text-decoration:none;letter-spacing:0.5px;">
+                                        &#9679; &nbsp; Instagram
                                     </a>
                                 </td>
                             </tr>
